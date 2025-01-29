@@ -15,8 +15,13 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+    res.send('<h1>Server is Healthy.</h1>');
+});
+
 app.use("/api/auth" , authRoute );
 app.use("/api/friend" , friendRoute );
+
 
 app.listen( process.env.PORT, async () => {
     try {
