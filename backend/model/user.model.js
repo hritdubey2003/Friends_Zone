@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
-  interests: [String],
+  interests:{ 
+    type: [String],
+    },
 });
 
 userSchema.methods.generateAuthToken = function () {

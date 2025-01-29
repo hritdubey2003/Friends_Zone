@@ -5,12 +5,14 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
 import cors from "cors";
+import friendRoute from "./route/friend.route.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth" , authRoute );
+app.use("/api/friend" , friendRoute );
 
 app.listen( process.env.PORT, async () => {
     try {

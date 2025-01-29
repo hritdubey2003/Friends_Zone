@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
     try {
-        const { username, password, email } = req.body;
+        const { username, password, email , interests } = req.body;
 
         if (!username || !password || !email) {
             return res.status(400).json({ message: "Please fill all the fields!" });
@@ -21,7 +21,7 @@ export const registerUser = async (req, res) => {
 
         const hashedPassword = await userModel.hashPassword(password);
 
-        const newUser = new userModel({ username, password: hashedPassword, email });
+        const newUser = new userModel({ username, password: hashedPassword, email , interests });
         await newUser.save();
 
         return res.status(201).json({ message: "User registered successfully!" });
