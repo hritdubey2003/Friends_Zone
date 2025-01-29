@@ -145,3 +145,35 @@ export const unfriendUser = async (req, res) => {
         return res.status(500).json({ message: "Server error!" });
     }
 };
+
+
+export const searchUsers = async (req, res) => {
+    try {
+        const { query } = req.query;  // Search query
+        const userId = req.user._id;
+
+        if (!query) {
+            return res.status(400).json({ message: "Please provide a search query!" });
+        }
+
+        // Find users who match the query (e.g., by username or email)
+        const users = await userModel.find({
+            $and: [
+                { _id: { $ne: userId } },  // Exclude the logged-in user
+                { $or: [  // Search by username or email
+                    { username: { $regex: query, $options: 'i' } },
+                    { email: { $regex: query, $options: 'i' } }
+                ] }
+            ]
+        }).select("_id username email");
+
+        if (users.length === 0) {
+            return res.status(404).json({ message: "No users found!" });
+        }
+
+        return res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Server error!" });
+    }
+};

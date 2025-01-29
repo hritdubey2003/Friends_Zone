@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../Page.css/Register.css";
 import Navbar from '../components/Navbar.jsx';
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -54,6 +54,7 @@ const Register = () => {
             setMessage("✅ Registration Successful! 🎉");
             setIsSuccess(true);
             setFormData({ username: "", email: "", password: "", interests: "" });
+            navigate("/login");
         } catch (error) {
             setMessage(`❌ ${error.response?.data?.message || "Something went wrong!"}`);
         } finally {

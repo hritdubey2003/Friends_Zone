@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../Page.css/Login.css";
 import Navbar from "../components/Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -15,7 +17,6 @@ const Login = () => {
     const [snowflakes, setSnowflakes] = useState([]);
 
     useEffect(() => {
-        // ❄️ Generate Snowflakes Randomly
         const snowArray = Array.from({ length: 50 }, (_, index) => ({
             id: index,
             left: Math.random() * 100,
@@ -54,6 +55,8 @@ const Login = () => {
 
             // Save Token for Future Requests
             localStorage.setItem("token", res.data.token);
+
+            navigate("/dashboard");
         } catch (error) {
             setMessage(`❌ ${error.response?.data?.message || "Invalid Credentials!"}`);
         } finally {
