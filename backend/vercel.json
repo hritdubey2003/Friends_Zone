@@ -11,6 +11,11 @@
         { "src": "/friend/(.*)", "dest": "/index.js" },
         { "src": "/post/(.*)", "dest": "/index.js" },
         { "src": "/(.*)", "dest": "/index.js" }
-    ]
+    ],
+    "functions": {
+        "index.js": {
+            "maxDuration": 30  
+        }
+    }
   }
   
