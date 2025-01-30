@@ -51,10 +51,7 @@ export const loginUser = async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET );
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            sameSite: "None",
-        });
+        res.cookie("token", token );
 
         return res.status(200).json({ message: "Login successful!", token });
     } catch (err) {
@@ -65,11 +62,7 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = async (req, res) => {
     try {
-        res.clearCookie("token", {
-            httpOnly: true,
-            sameSite: "Strict",
-            secure: process.env.NODE_ENV === "production",
-        });
+        res.clearCookie("token");
         return res.status(200).json({ message: "User logged out successfully!" });
     } catch (err) {
         console.error(err);

@@ -2,14 +2,15 @@
     "version": 2,
     "builds": [
         {
-            "src": "index.js",
+            "src": "src/index.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
-        { "src": "/api/auth(.*)", "dest": "/index.js" },
-        { "src": "/api/friend(.*)", "dest": "/index.js" },
-        { "src": "/api/post(.*)", "dest": "/index.js" },
+        { "src": "/auth/(.*)", "dest": "/index.js" },
+        { "src": "/friend/(.*)", "dest": "/index.js" },
+        { "src": "/post/(.*)", "dest": "/index.js" },
         { "src": "/(.*)", "dest": "/index.js" }
     ]
-}
+  }
+  

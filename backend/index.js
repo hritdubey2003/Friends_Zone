@@ -9,7 +9,10 @@ import cors from "cors";
 import friendRoute from "./route/friend.route.js";
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -17,9 +20,9 @@ app.get('/', (req, res) => {
     res.send('<h1>Server is Healthy.</h1>');
 });
 
-app.use("/api/auth" , authRoute );
-app.use("/api/friend" , friendRoute );
-app.use("/api/post" , postroute );
+app.use("/auth" , authRoute );
+app.use("/friend" , friendRoute );
+app.use("/post" , postroute );
 
 
 app.listen( process.env.PORT, async () => {
